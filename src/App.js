@@ -4,6 +4,7 @@ import Greet from "./components/Greet";
 import Counter from "./components/counter";
 import EventBind from "./components/EventBind";
 import ParentComponent from "./components/ParentComponent";
+import UserGreeting from "./components/UserGreeting";
 
 const App = () => {
   const [status, setStatus] = useState("About to send");
@@ -20,6 +21,7 @@ const App = () => {
       <Counter />
       <EventBind />
       <ParentComponent />
+      <UserGreeting />
     </div>
   );
 };
