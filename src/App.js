@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./App.css";
 import Greet from "./components/Greet";
 import Counter from "./components/counter";
 import EventBind from "./components/EventBind";
 import ParentComponent from "./components/ParentComponent";
 import UserGreeting from "./components/UserGreeting";
+import NewApp from "./NewApp";
 
 const App = () => {
   const [status, setStatus] = useState("About to send");
@@ -22,6 +22,7 @@ const App = () => {
       <EventBind />
       <ParentComponent />
       <UserGreeting />
+      <NewApp />
     </div>
   );
 };
