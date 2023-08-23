@@ -1,30 +1,48 @@
 import React, { useState } from "react";
-import Greet from "./components/Greet";
-import Counter from "./components/counter";
-import EventBind from "./components/EventBind";
-import ParentComponent from "./components/ParentComponent";
-import UserGreeting from "./components/UserGreeting";
-import NewApp from "./NewApp";
+import Header from "./Components/Header";
+import Tasks from "./Components/Tasks";
+import AddTask from "./Components/AddTask";
+const NewApp = () => {
+  const [tasks, setTasks] = useState([
+    {
+      id: "1",
+      text: "Food Shopping",
+      day: "Feb 5th at 2:30pm",
+      reminder: false,
+    },
+    { id: "2", text: "Go to Gym", day: "Feb 6th at 10:00am", reminder: true },
+    { id: "3", text: "Study React", day: "Feb 7th at 4:00pm", reminder: true },
+  ]);
 
-const App = () => {
-  const [status, setStatus] = useState("About to send");
-  function updateBtn() {
-    setStatus("Done");
-  }
+  // Add Task
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newTask = { id, ...task };
+    setTasks([...tasks, newTask]);
+  };
+  // Delete Task
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+  // Toggle reminder
+  const toggleReminder = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      )
+    );
+  };
   return (
-    <div>
-      <h1>{status}</h1>
-      <button onClick={updateBtn}>Send</button>
-      <Greet name="Korode" age="20" sex="male" />
-      <Greet name="bayo" age="10" sex="male" />
-      <Greet name="tolu" age="30" sex="female" />
-      <Counter />
-      <EventBind />
-      <ParentComponent />
-      <UserGreeting />
-      <NewApp />
+    <div className="container">
+      <Header />
+      <AddTask onAdd={addTask} />
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />
+      ) : (
+        "No Task to show"
+      )}
     </div>
   );
 };
 
-export default App;
+export default NewApp;
